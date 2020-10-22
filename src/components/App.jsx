@@ -18,40 +18,58 @@ class App extends Component {
     }
     handleFilmButton = () => {
         fetch("https://ghibliapi.herokuapp.com/films")
-            .then(response => response.json())
-            .then(data => this.setState({ films: data, filmButton: !this.state.filmButton }))
+            .then(data => data.json())
+            .then(data => this.setState({ films: data, filmButton: true, peopleButton: false }))
             .catch(err => console.log(err));
     }
 
     handlePeopleButton = () => {
         fetch("https://ghibliapi.herokuapp.com/people")
-            .then(response => response.json())
-            .then(data => this.setState({ people: data, peopleButton: !this.state.peopleButton }))
+            .then(data => data.json())
+            .then(data => this.setState({ people: data, peopleButton: true, filmButton: false }))
             .catch(err => console.log(err));
     }
 
-render() {
-    if (this.state.isLoaded === false) {
-        return (
-            <Fragment>
-                <img src="https://i.pinimg.com/originals/03/51/71/0351711fe834c3a96656f65b4c54b2b2.jpg" width="400" height="340" alt="" />
-                <button onClick={this.handleFilmButton}>films</button>
-                <button onClick={this.handlePeopleButton}>people</button>
-            </Fragment>
-        )
-    } else {
-        return (
-            <Fragment>
-                <img src="https://i.pinimg.com/originals/03/51/71/0351711fe834c3a96656f65b4c54b2b2.jpg" width="400" height="340" alt="" />
-                <button onClick={this.handleFilmButton}>films</button>
-                <button onClick={this.handlePeopleButton}>people</button>
-                <br></br>
-                <br></br>
-                <FilmMap films={this.state.films} />
-                <PeopleMap people={this.state.people}/>
-            </Fragment>
-        )
+    render() {
+        if (this.state.filmButton) {
+            return (
+                <Fragment>
+                    <div className="cards">
+                    <img src="https://i.pinimg.com/originals/03/51/71/0351711fe834c3a96656f65b4c54b2b2.jpg" width="400" height="340" alt="" />
+                    <button className="mx-1 btn btn-dark" onClick={this.handleFilmButton}>Films</button>
+                    <button className="mx-1 btn btn-dark" onClick={this.handlePeopleButton}>People</button>
+                    <div className="container">
+                    <FilmMap films={this.state.films} />
+                    </div>
+                    </div>
+                </Fragment>
+            )
+        } else if (this.state.peopleButton) {
+            return (
+                <Fragment>
+                    <div className="cards">
+                    <img src="https://i.pinimg.com/originals/03/51/71/0351711fe834c3a96656f65b4c54b2b2.jpg" width="400" height="340" alt="" />
+                    <button className="mx-1 btn btn-dark" onClick={this.handleFilmButton}>Films</button>
+                    <button className="mx-1 btn btn-dark" onClick={this.handlePeopleButton}>People</button>
+                    <div className="container">
+                    <PeopleMap people={this.state.people} />
+                    </div>
+                    </div>
+                </Fragment>
+            )
+        } else {
+            return (
+                <Fragment>
+                    <div className="cards">
+                    <img src="https://i.pinimg.com/originals/03/51/71/0351711fe834c3a96656f65b4c54b2b2.jpg" width="400" height="340" alt="" />
+                    <div className="container">
+                    <button className="mx-1 btn btn-dark" onClick={this.handleFilmButton}>Films</button>
+                    <button className="mx-1 btn btn-dark" onClick={this.handlePeopleButton}>People</button>
+                    </div>
+                    </div>
+                </Fragment>
+            )
+        }
     }
-}
 }
 export default App

@@ -6,10 +6,13 @@ import './styles.css'
 let Cards = props => {
         return (
             <Fragment>
-                <div className="card bg-light mb-3 cards">
+                <div className="card bg-secondary mb-3 cards">
                     <div className="card-body">
-                        <h5 className="card-title">{props.oneFilm.title}</h5>
-                        <p className="card-text">{props.oneFilm.description}</p>
+                        <h5 className="card-title text">{props.oneFilm.title}</h5>
+                        <p className="card-text text">{props.oneFilm.description}</p>
+                        <a href={props.oneFilm.url}>
+                            <button className="btn btn-dark">Click for raw data</button>
+                        </a>
                     </div>
                 </div>
             </Fragment>

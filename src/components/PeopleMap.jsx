@@ -5,7 +5,7 @@ import uuid from 'react-uuid';
 
 
 let PeopleMap = (props) => {
-    return props.people.map((pizza,key) => <PeopleCard onePerson={pizza} key={uuid()}/>)
+    return props.people.map(pizza => <PeopleCard onePerson={pizza} key={uuid()}/>)
 }
 
 export default PeopleMap;
